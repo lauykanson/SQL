@@ -61,6 +61,18 @@ VALUES
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 # The following are the queries I have completed so far:
 
+--A list of employee number of each industry
+SELECT industry, SUM(employees) AS total_employee_numbers
+FROM fortune_companies
+GROUP BY industry
+ORDER by total_employee_numbers DESC;
+
+--A list of the total revenue in billions within each industry
+SELECT industry, ROUND(SUM(revenue)) AS total_revenue_billions
+FROM fortune_companies
+GROUP BY industry
+ORDER by total_revenue_billions DESC;
+
 --A list of healthcare companies that provide healthcaren benefits and at least 10 weeks worth of maternity leave
 SELECT company_name, industry, maternity_leave_weeks
 FROM fortune_companies
