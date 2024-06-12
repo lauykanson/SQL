@@ -31,3 +31,9 @@ ORDER by average_revenue_billions DESC;
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS average_stay_years
 FROM fortune_companies
 GROUP by industry;
+
+--Which industry has the most paid holidays on average?
+SELECT industry, ROUND(AVG(paid_time_off_days),1) AS average_paid_holidays
+FROM fortune_companies
+GROUP by industry
+ORDER by average_paid_holidays DESC;
