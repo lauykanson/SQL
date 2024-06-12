@@ -37,3 +37,11 @@ SELECT industry, ROUND(AVG(paid_time_off_days),1) AS average_paid_holidays
 FROM fortune_companies
 GROUP by industry
 ORDER by average_paid_holidays DESC;
+
+
+--List the energy companies that has at least 15 days paid holidays and 8 weeks worth of maternity leave weeks.
+SELECT company_name, paid_time_off_days, maternity_leave_weeks
+FROM fortune_companies
+WHERE industry='Energy'
+AND paid_time_off_days>=15
+AND maternity_leave_weeks>=8;
