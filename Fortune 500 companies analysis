@@ -1,8 +1,12 @@
 --A list of healthcare companies that provide healthcaren benefits and at least 10 weeks worth of maternity leave
-
 select company_name, industry, maternity_leave_weeks
 from fortune_companies
 where industry='Healthcare' 
 AND maternity_leave_weeks>=10
-AND healthcare_benefits=1
-;
+AND healthcare_benefits=1;
+
+--Average revenue of each sector?
+select industry, ROUND(AVG(revenue)) AS average_revenue
+from fortune_companies
+group by industry
+order by average_revenue;
