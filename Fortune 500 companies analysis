@@ -1,12 +1,33 @@
 --A list of healthcare companies that provide healthcaren benefits and at least 10 weeks worth of maternity leave
-select company_name, industry, maternity_leave_weeks
-from fortune_companies
-where industry='Healthcare' 
+SELECT company_name, industry, maternity_leave_weeks
+FROM fortune_companies
+WHERE industry='Healthcare' 
 AND maternity_leave_weeks>=10
 AND healthcare_benefits=1;
 
 --Average revenue of each sector?
-select industry, ROUND(AVG(revenue)) AS average_revenue
-from fortune_companies
-group by industry
-order by average_revenue;
+SELECT industry, ROUND(AVG(revenue)) AS average_revenue
+FROM fortune_companies
+GROUP by industry
+ORDER by average_revenue;
+
+--Assign all the companies in the Telecommunications industry as "great", "acceptable", or "poor" based on the number of paid time off days offered. 
+SELECT company_name,
+CASE WHEN paid_time_off_days>=20 THEN 'great'
+WHEN paid_time_off_days>=15 THEN 'acceptable'
+ELSE 'poor'
+END AS worker_friendliness
+FROM fortune_companies
+WHERE industry='Telecommunications';
+
+--Which industries have an average revenue of at least $300 Billion, and what are their avg revenues
+SELECT industry, ROUND(AVG(revenue),1) AS average_revenue_billions
+FROM fortune_companies
+GROUP by industry
+HAVING average_revenue_billions>300
+ORDER by average_revenue_billions DESC;
+
+--A list of industries and their corresponding average employee tenure
+SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS average_stay_years
+FROM fortune_companies
+GROUP by industry;
