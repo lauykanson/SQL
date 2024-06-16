@@ -189,6 +189,17 @@ WHERE Subject = 'Mathematics'
 AND Current = 'Yes'
 ;
 
+(Query)--What books have Ethan Wong published?
+
+SELECT Name, Title
+FROM Author
+LEFT JOIN AuthorTextbookLink
+ON AuthorTextbookLink.AuthorID = Author.AuthorID
+LEFT JOIN Textbooks
+ON AuthorTextbookLink.TextbookID = Textbooks.TextbookID
+WHERE Name = 'Ethan Wong'
+;
+
 
 
 
