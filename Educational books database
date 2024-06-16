@@ -162,8 +162,18 @@ FROM Courses
 LEFT JOIN Textbooks
 ON Courses.CourseID = Textbooks.CourseID
 WHERE Courses.Subject = 'Physics'
-AND Courses.Current = 'Yes'
-;
+AND Courses.Current = 'Yes';
+
+--Which author has published the most books?
+
+SELECT Name, COUNT(Author.AuthorID) AS number_of_books_published
+FROM Author 
+LEFT JOIN AuthorTextbookLink
+ON Author.AuthorID = AuthorTextbookLink.AuthorID
+INNER JOIN Textbooks
+ON Textbooks.TextbookID = AuthorTextbookLink.TextbookID
+GROUP BY Name
+ORDER BY number_of_books_published DESC
 
 
 
