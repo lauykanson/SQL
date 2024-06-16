@@ -133,7 +133,7 @@ INSERT INTO AuthorTextbookLink (AuthorID, TextbookID) VALUES
 
 --Find the names of the authors who wrote the economics textbooks that are currently in-use, showing names of authors, coursenames and titles of the textbooks.
 
-SELECT coursename, title, name
+SELECT courses.coursename, textbooks.title, author.name
 FROM courses
 INNER JOIN textbooks
 ON courses.CourseID = textbooks.CourseID
@@ -144,6 +144,29 @@ ON author.authorID = authortextbooklink.authorID
 WHERE subject = 'Economics'
 AND current = 'Yes'
 ORDER by name;
+
+-- Whats the oldest psychology textbook that is still in use?
+
+SELECT Courses.Subject, Textbooks.Title, Textbooks.PublicationYear
+FROM Courses
+LEFT JOIN Textbooks
+ON Courses.CourseID = Textbooks.CourseID
+WHERE Courses.Subject = 'Psychology'
+AND Courses.Current = 'Yes'
+ORDER BY Textbooks.PublicationYear;
+
+--A list of the physics courses that are currently availabe, and the textbooks that are available for the courses
+
+SELECT Courses.CourseName, Courses.GradeLevel, Textbooks.Title
+FROM Courses
+LEFT JOIN Textbooks
+ON Courses.CourseID = Textbooks.CourseID
+WHERE Courses.Subject = 'Physics'
+AND Courses.Current = 'Yes'
+;
+
+
+
 
 
 
