@@ -1,0 +1,36 @@
+--Makea list of all the bike lanes that have an average safety rating of 4.0 or higher, showing the average safety rating 
+for each of those bike lanes, and a label that says "Safe Lane". 
+
+WITH temptable as(
+SELECT street, AVG(safetyrating) as average_safetyrating
+FROM CityBikeLanes
+GROUP BY street
+HAVING AVG(safetyrating) >= 4.0
+ORDER BY AVG(safetyrating) DESC
+)
+
+SELECT street, average_safetyrating, 'Safe Lane' as Label
+FROM temptable;
+
+OR
+
+WITH temptable as(
+SELECT street, AVG(safetyrating) as average_safetyrating
+FROM CityBikeLanes
+GROUP BY street
+ORDER BY AVG(safetyrating) DESC
+)
+
+SELECT street, average_safetyrating, 'Safe Lane' as Label
+FROM temptable
+WHERE average_safetyrating >= 4.0;
+
+--A list of all the bike lanes, both safety ratings for each lane, the average safety rating for each lane, and a label with the recommendation as "Remove", "Leave As-Is", or "Improvements Needed". 
+
+SELECT street, safetyrating,
+AVG(safetyrating) OVER (PARTITION BY street) as "Average_safety_rating",
+CASE WHEN AVG(safetyrating) OVER (PARTITION BY street) >= 4 THEN "Leave As-Is"
+WHEN AVG(safetyrating) OVER (PARTITION BY street) < 2.5 THEN "Remove"
+ELSE "Improvements Needed"
+END Recommendations
+FROM CityBikeLanes;
