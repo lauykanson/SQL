@@ -1,0 +1,47 @@
+--What is the average danceability by artist?
+
+SELECT artist_name, ROUND(AVG(danceability),3) AS average_dancebility
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name;
+
+--What is the average danceability by track?
+
+SELECT track_name, AVG(danceability) AS average_dancebility
+FROM BIT_DB.Spotifydata
+GROUP BY track_name
+ORDER BY average_dancebility;
+
+--Who are the top 10 artists based on popularity?
+
+SELECT artist_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+--What artist released the longest song?
+
+SELECT artist_name, MAX(duration_ms)/1000 AS length_of_song_in_seconds
+FROM BIT_DB.Spotifydata;
+
+--What's the average loudness for the 10 most popular songs? 
+
+SELECT AVG(loudness)
+FROM (
+SELECT popularity, loudness
+FROM Spotifydata
+ORDER BY popularity DESC
+LIMIT 10
+)
+;
+
+--Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”. 
+
+WITH temptable as (
+SELECT artist_name, ROUND(AVG(popularity),1) AS average_popularity
+FROM Spotifydata
+GROUP BY artist_name
+ORDER BY average_popularity DESC)
+
+SELECT artist_name, average_popularity, 'Top Star' AS tag
+FROM temptable
+WHERE average_popularity>=90;
