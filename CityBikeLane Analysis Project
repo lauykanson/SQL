@@ -1,3 +1,6 @@
+# The following are the queries I have completed so far:
+
+
 --Makea list of all the bike lanes that have an average safety rating of 4.0 or higher, showing the average safety rating 
 for each of those bike lanes, and a label that says "Safe Lane". 
 
