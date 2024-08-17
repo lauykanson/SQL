@@ -1,3 +1,6 @@
+# The following are the queries I have completed so far:
+
+
 --Show Customers (their full names, customer ID, and country) who are not in the US. 
 
 SELECT CustomerId, FirstName, LastName, Country
