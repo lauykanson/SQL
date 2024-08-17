@@ -1,3 +1,6 @@
+# The following are the queries I have completed so far:
+
+
 --What is the average danceability by artist?
 
 SELECT artist_name, ROUND(AVG(danceability),3) AS average_dancebility
